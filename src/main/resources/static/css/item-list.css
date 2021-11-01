@@ -1,0 +1,74 @@
+.row-btn-edit{
+    width: 150px;
+    background-color: #0d6efd;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.row-btn-delete{
+    width: 150px;
+    background-color: #b02a37;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.search{
+    width: 500px;
+    height: 50px;
+}
+
+.search_Input {
+    width: 440px;
+    border: 2px solid #0c7dff;
+    padding: 10px;
+    height: 50px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #ffffff;
+}
+.searchTerm:focus{
+    color: #0c7dff;
+}
+
+.search_Button {
+    width: 50px;
+    height: 50px;
+    padding: 8px;
+    background: #0c7dff;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    border: 2px solid #0c7dff;
+}
+
+.delete_popup {
+    display: none;
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.form-container .btn {
+    background-color: #0d6efd;
+    color: white;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+.form-container .cancel {
+    background-color: red;
+}

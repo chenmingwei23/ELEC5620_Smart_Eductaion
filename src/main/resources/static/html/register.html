@@ -128,12 +128,7 @@
                     </li>
                 </ul>
                 <hr>
-                <div>
-                    <a href="personal-info.html" class="d-flex align-items-center link-dark text-decoration-none">
-                        <img src="../img/logo/headlogo.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
-                        <strong>Minghao</strong>
-                    </a>
-                </div>
+
             </div>
         </div>
 
@@ -223,117 +218,123 @@
 
 
     <div style="width: 100%; margin-top: 51px; overflow-y: auto; overflow-x: hidden">
-
         <div style="max-width: 800px; margin: auto">
-            <div>
-                <div>
-                    <div class="py-5 text-center">
-                        <h2>Your profile</h2>
-                        <p class="lead">Some information can only be changed by the project manager.</p>
-                    </div>
+            <div class="py-5 text-center">
+                <h2>Register</h2>
+                <p class="lead">Only the project manager can register an account.</p>
+            </div>
 
-                    <div class="row g-5">
-                        <div>
-                            <form class="needs-validation" novalidate>
-                                <div class="row g-3">
-                                    <div class="col-sm-6">
-                                        <label for="firstName" class="form-label">First name</label>
-                                        <input type="text" class="form-control" id="firstName" readonly="readonly" placeholder="" value="Minghao" required>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label for="lastName" class="form-label">Last name</label>
-                                        <input type="text" class="form-control" id="lastName" readonly="readonly" placeholder="" value="Zhang" required>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="company" class="form-label">Company</label>
-                                        <input type="email" class="form-control" id="company" readonly="readonly" placeholder="" value="Nine Yards">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" readonly="readonly" placeholder="" value="mzha0706@uni.sydney.edu.au">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="address" class="form-label">Mobile</label>
-                                        <input type="text" class="form-control" id="mobile" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Please enter your mobile phone number.
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="landline" class="form-label">Landline<span class="text-muted">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="landline" placeholder="">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="address" class="form-label">Address<span class="text-muted">(Optional)</span></label>
-                                        <input type="text" class="form-control" id="address" placeholder="">
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label for="department" class="form-label">Department</label>
-                                        <select class="form-select" id="department" required>
-                                            <option value="">Choose...</option>
-                                            <option>Design</option>
-                                            <option>Develop</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a valid department.
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <label for="position" class="form-label">Position</label>
-                                        <select class="form-select" id="position" required>
-                                            <option value="">Choose...</option>
-                                            <option>Designer</option>
-                                            <option>Developer</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a valid position.
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="other contact" class="form-label">Other contact</label>
-                                        <input type="text" class="form-control" id="other contact" placeholder="" required>
-                                        <small class="text-muted">Full name of other contact</small>
-                                        <div class="invalid-feedback">
-                                            Other contact is required.
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="contact number" class="form-label">Contact number</label>
-                                        <input type="text" class="form-control" id="contact number" placeholder="" required>
-                                        <small class="text-muted">Telephone of other contact</small>
-                                        <div class="invalid-feedback">
-                                            Contact number is required.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-top: 10px">Save</button>
-                                <button class="w-100 btn btn-primary btn-lg" type="signout" style="margin-top: 10px; background-color: #FF3333; border-color: #FF3333">Sign Out</button>
-                            </form>
+            <div class="row g-5">
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-12 h4 text-center">
+                            Create Company
                         </div>
-                    </div>
-                </div>
+                        <div class="col-sm-6">
+                            <label for="companyName" class="form-label">Company name</label>
+                            <input type="text" class="form-control" id="companyName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Please entry a valid company name.
+                            </div>
+                        </div>
 
-                <footer class="my-5 pt-5 text-muted text-center text-small">
-                    <p class="mb-1">&copy; 2021–2021 Nine Yards</p>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="#">Privacy</a></li>
-                        <li class="list-inline-item"><a href="#">Terms</a></li>
-                        <li class="list-inline-item"><a href="#">Support</a></li>
-                    </ul>
-                </footer>
+                        <div class="col-sm-6">
+                            <label for="ABN" class="form-label">ABN</label>
+                            <input type="number" class="form-control" id="ABN" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Please entry a valid ABN.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="companyType" class="form-label">Company Type</label>
+                            <select class="form-select" id="companyType" required>
+                                <option value="">Choose...</option>
+                                <option>IT</option>
+                                <option>Finance</option>
+                                <option>Retail</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid type.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="telephone" class="form-label">Telephone</label>
+                            <input type="text" class="form-control" id="telephone" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid telephone.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid address.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-top: 10px">Save</button>
+                </form>
+
+                <form class="needs-validation" novalidate style="margin-top: 30px">
+                    <div class="col-sm-12 h4 text-center">
+                        Create Account
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" name="firstName" required>
+                            <div class="invalid-feedback">
+                                Please entry a valid first name.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Please entry a valid last name.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="" value="">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="password" class="form-label">Create password</label>
+                            <input type="password" class="form-control" id="password" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid password.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="confirm-password" class="form-label">Confirm password</label>
+                            <input type="password" class="form-control" id="confirm-password" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid password.
+                            </div>
+                        </div>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-top: 10px">Save</button>
+                    </div>
+
+                </form>
             </div>
         </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
 
     </div>
 

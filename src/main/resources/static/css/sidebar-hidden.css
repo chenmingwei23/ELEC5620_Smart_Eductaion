@@ -1,0 +1,97 @@
+.row {
+    background: #f8f9fa;
+    /*20211009-Minghao-modify*/
+    padding: 10px !important;
+}
+
+.form-label, h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.container-all {
+    display: flex;
+    align-items: stretch;
+}
+
+/* The sidebar menu */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    /*overflow-y: auto;*/
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+    color: #b6b6b6;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin-left: 5px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+    height: 35px;
+    width: 35px;
+    margin-right: 8px;
+    cursor: pointer;
+    background-color: #444;
+    color: white;
+    border: none;
+    align-content: center;
+    border-radius: 3px;
+}
+
+.openbtn:hover {
+    background-color: #A6A6A6;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}
+
+.dropdown-toggle { outline: 0; }
+
+.sidebar-footer{
+    height: 50px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    list-style-type: none;
+    padding-bottom:5.5em;
+}
+
+.business-select, .department-select, .company-select {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 30ch;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+}
