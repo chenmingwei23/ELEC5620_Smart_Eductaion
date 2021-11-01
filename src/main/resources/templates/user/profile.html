@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Personal info</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap-5.1.1-dist/css/bootstrap.min.css}">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sidebar-hidden.css}"/>
+</head>
+<body style="background-color: #f5f5f5; height: 100%">
+
+<svg th:replace="~{component::icons}"></svg>
+
+<main>
+
+    <!--    navbar-->
+    <nav th:replace="~{component::nabvar}"></nav>
+
+
+    <div style="width: 100%; margin-top: 51px; overflow-y: auto; overflow-x: hidden">
+
+        <div style="max-width: 800px; margin: auto">
+            <div class="py-5 text-center">
+                <h2>Your profile</h2>
+                <p class="lead">Some information can only be changed by the project manager.</p>
+            </div>
+
+            <div class="row g-5">
+                <form class="needs-validation" novalidate method="post" th:action="@{/user/profile}">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" readonly="readonly" placeholder=""
+                                   th:value="${loginUser.firstName!=null?loginUser.firstName:''}" required name="firstname">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName" readonly="readonly" placeholder=""
+                                   th:value="${loginUser.lastName!=null?loginUser.lastName:''}" required name="lastname">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="company" class="form-label">Company</label>
+                            <input type="text" class="form-control" id="company" readonly="readonly" placeholder=""
+                                   th:value="${loginCompany.name!=null?loginCompany.name:''}" name="company">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" readonly="readonly" placeholder=""
+                                   th:value="${loginUser.email!=null?loginUser.email:''}" name="email">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="mobile" class="form-label">Mobile</label>
+                            <input type="number" class="form-control" id="mobile" placeholder=""
+                                   th:value="${loginUser.mobile!=null?loginUser.mobile:''}" required name="mobile">
+                            <div class="invalid-feedback">
+                                Please enter your mobile phone number.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="landline" class="form-label">Landline<span class="text-muted">(Optional)</span></label>
+                            <input type="number" class="form-control" id="landline" placeholder=""
+                                   th:value="${loginUser.landline!=null?loginUser.landline:''}" name="landline">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address" class="form-label">Address<span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control" id="address" placeholder=""
+                                   th:value="${loginUser.address!=null?loginUser.address:''}" name="address">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="department" class="form-label">Department</label>
+<!--                            <select class="form-select" id="department" required name="department"-->
+<!--                                    th:value="${loginUser.department!=null?loginUser.department:''}">-->
+<!--                                <option>Choose...</option>-->
+<!--                                <option>Manage</option>-->
+<!--                                <option>Design</option>-->
+<!--                                <option>Develop</option>-->
+<!--                                <option>Financial</option>-->
+<!--                                <option>Client</option>-->
+<!--                            </select>-->
+                            <select class="form-select" id="department" name="department" required  th:field="*{loginUser.department}">
+                                <option th:each="department : ${departments}"
+                                        th:value="${department}"
+                                        th:text="${department}">Wireframe</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid department.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="position" class="form-label">Position</label>
+                            <select class="form-select" id="position" name="position" required  th:field="*{loginUser.position}">
+                                <option th:each="position : ${positions}"
+                                        th:value="${position}"
+                                        th:text="${position}">Wireframe</option>
+                            </select>
+<!--                            <select class="form-select" id="position" required name="position"-->
+<!--                                    th:value="${loginUser.position!=null?loginUser.position:''}">-->
+<!--                                <option>Choose...</option>-->
+<!--                                <option>Project manager</option>-->
+<!--                                <option>Product manager</option>-->
+<!--                                <option>Product assistant</option>-->
+<!--                                <option>Interaction designer</option>-->
+<!--                                <option>UI designer</option>-->
+<!--                                <option>Front-end developer</option>-->
+<!--                                <option>Back-end developer</option>-->
+<!--                                <option>Tester</option>-->
+<!--                                <option>Cost estimator</option>-->
+<!--                                <option>Accountant</option>-->
+<!--                                <option>Client contact</option>-->
+<!--                            </select>-->
+                            <div class="invalid-feedback">
+                                Please select a valid position.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="other contact" class="form-label">Other contact</label>
+                            <input type="text" class="form-control" id="other contact" placeholder=""
+                                   th:value="${loginUser.otherContactName!=null?loginUser.otherContactName:''}"
+                                   required name="otherContactName">
+                            <small class="text-muted">Full name of other contact</small>
+                            <div class="invalid-feedback">
+                                Other contact is required.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="contact number" class="form-label">Contact number</label>
+                            <input type="number" class="form-control" id="contact number" placeholder=""
+                                   th:value="${loginUser.otherContactNumber!=null?loginUser.otherContactNumber:''}"
+                                   required name="otherContactNumber">
+                            <small class="text-muted">Telephone of other contact</small>
+                            <div class="invalid-feedback">
+                                Contact number is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-top: 10px">Save</button>
+                    <a class="w-100 btn btn-primary btn-danger" th:href="@{/user/logout}" style="margin-top: 10px;">Sign Out</a>
+                </form>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2021–2021 Nine Yards</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
+
+    </div>
+
+
+</main>
+
+<script th:src="@{/bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/sidebar.js}"></script>
+<script th:src="@{/js/form-validation.js}"></script>
+
+</body>
+</html>

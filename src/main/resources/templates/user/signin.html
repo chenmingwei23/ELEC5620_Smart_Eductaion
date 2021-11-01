@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Signin</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link rel="stylesheet" th:href="@{/bootstrap-5.1.1-dist/css/bootstrap.min.css}">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/signin.css}"/>
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <form class="mt-5" method="post" th:action="@{/user/signin}">
+    <img class="mb-4" th:src="@{/img/logo/Nineyards_logo.png}" alt="" width="300" height="26" style="margin: auto">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="email" th:class="|form-control ${userEmailMsg!=null?'is-invalid':''}|"
+             th:value="${userEmailMsg}"
+             class="form-control" id="floatingInput" placeholder="" name="email">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
+             th:value="${passwordMsg}"
+             class="form-control" id="floatingPassword" placeholder="" name="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" id="remember-me" name="rememberme"
+               th:checked="${param.rememberme}"> Remember me
+      </label>
+    </div>
+    <div style="margin-bottom: 10px">
+      <a th:href="@{/user/send-email}" style="color: #0a53be">Forget your password?</a>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <a class="w-100 btn btn-lg btn-secondary" th:href="@{/user/register}" style="margin-top: 10px">Register</a>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021–2021 Nine Yards</p>
+  </form>
+
+</main>
+
+  </body>
+</html>

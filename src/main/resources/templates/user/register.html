@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Register</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap-5.1.1-dist/css/bootstrap.min.css}">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sidebar-hidden.css}"/>
+
+
+</head>
+<body style="background-color: #f5f5f5; height: 100%">
+
+
+<main>
+
+    <div style="width: 100%; margin-top: 51px; overflow-y: auto; overflow-x: hidden">
+        <div style="max-width: 800px; margin: auto">
+            <div class="py-5 text-center">
+                <h2>Register</h2>
+                <p class="lead">Only the project manager can register an account.</p>
+            </div>
+
+            <div class="row g-5">
+                <form class="needs-validation" novalidate style="margin-top: 30px" method="post"
+                      th:action="@{/user/register}">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder=""
+                                   th:value="${usernameMsg}" required name="firstName">
+                            <div class="invalid-feedback">
+                                Please entry a valid first name.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder=""
+                                   th:value="${usernameMsg}" required name="lastName">
+                            <div class="invalid-feedback">
+                                Please entry a valid last name.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="" th:value="${emailMsg}"
+                                   required name="email">
+                        </div>
+                        <input type="hidden" class="form-control" id="type" placeholder="" value=0 name="type">
+                        <div class="col-12">
+                            <label for="password" class="form-label">Create password</label>
+                            <input type="password" class="form-control" id="password" placeholder="" required
+                                   name="password">
+                            <div class="invalid-feedback">
+                                Please enter a valid password.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="confirm-password" class="form-label">Confirm password</label>
+                            <input type="password" class="form-control" id="confirm-password" placeholder="" required
+                                   name="confirm-password">
+                            <div class="invalid-feedback">
+                                Please enter a valid password.
+                            </div>
+                        </div>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-top: 30px">Register</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2021–2021 Nine Yards</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
+
+    </div>
+</main>
+
+
+<script th:src="@{/bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/sidebar.js}"></script>
+<script th:src="@{/js/form-validation.js}"></script>
+<script th:src="@{/js/register.js}"></script>
+</body>
+</html>
+
+
+

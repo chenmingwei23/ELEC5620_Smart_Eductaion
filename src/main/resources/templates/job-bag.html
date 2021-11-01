@@ -1,0 +1,935 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="projectId" th:content="${projectId}"/>
+    <title>Job bag</title>
+
+    <link rel=stylesheet href="../css/platform.css" type="text/css">
+    <link rel=stylesheet href="../libs/jquery/dateField/jquery.dateField.css" type="text/css">
+
+    <link rel=stylesheet href="../css/gantt.css" type="text/css">
+    <link rel=stylesheet href="../css/ganttPrint.css" type="text/css" media="print">
+    <link rel=stylesheet href="../libs/jquery/valueSlider/mb.slider.css" type="text/css" media="print">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="../libs/jquery/jquery.livequery.1.1.1.min.js"></script>
+    <script src="../libs/jquery/jquery.timers.js"></script>
+
+    <script src="../libs/utilities.js"></script>
+    <script src="../libs/forms.js"></script>
+    <script src="../libs/date.js"></script>
+    <script src="../libs/dialogs.js"></script>
+    <script src="../libs/layout.js"></script>
+    <script src="../libs/i18nJs.js"></script>
+    <script src="../libs/jquery/dateField/jquery.dateField.js"></script>
+    <script src="../libs/jquery/JST/jquery.JST.js"></script>
+    <script src="../libs/jquery/valueSlider/jquery.mb.slider.js"></script>
+
+    <script type="text/javascript" src="../libs/jquery/svg/jquery.svg.min.js"></script>
+    <script type="text/javascript" src="../libs/jquery/svg/jquery.svgdom.1.8.js"></script>
+
+
+    <script src="../js/ganttUtilities.js"></script>
+    <script src="../js/ganttTask.js"></script>
+    <script src="../js/ganttDrawerSVG.js"></script>
+    <script src="../js/ganttZoom.js"></script>
+    <script src="../js/ganttGridEditor.js"></script>
+    <script src="../js/ganttMaster.js"></script>
+    <script src="../js/ganttChart.js"></script>
+
+
+    <!--<script src="libs/profiling.js"></script>-->
+    <!--<script type="text/javascript" src="ganttTestSuite.js"></script>-->
+
+    <!--  navbar-->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="../css/sidebar.css" rel="stylesheet">
+    <link href="../css/sidebar-hidden.css" rel="stylesheet">
+    <link href="../css/job-bag.css" rel="stylesheet">
+</head>
+<body style="background-color: #fff;">
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="speedometer2" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+        <path fill-rule="evenodd"
+              d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+    </symbol>
+    <symbol id="table" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+    </symbol>
+    <symbol id="people-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+    </symbol>
+    <symbol id="grid" viewBox="0 0 16 16">
+        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+    </symbol>
+</svg>
+
+<main>
+
+    <!--    navbar-->
+    <nav class="navbar navbar-expand-md fixed-top" style="background-color: #e6e6e6; height: 51px">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarsExample02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <button class="openbtn" onclick="openNav()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-layout-text-sidebar" viewBox="0 0 16 16">
+                                <path d="M3.5 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM3 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
+                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm12-1v14h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zm-1 0H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h9V1z"/>
+                            </svg>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="openbtn" onclick="openMsg()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+                <form>
+                    <div class="d-flex" style="height: 35px; padding: 5px">
+                        <img src="../img/logo/Nineyards_logo.png" alt="" width="298" height="25" style="margin: auto">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--        navigation sidebar-->
+        <div id="mySidebar" class="sidebar" style="overflow-y: auto">
+
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 200px; height: 100%">
+                <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+                     style="height: 18px">
+                    <img class="mb-4" src="../img/logo/Nineyards_logo.png" alt="" width="150" height="15"
+                         style="margin: auto">
+                </div>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                    </svg>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li>
+                        <a href="#" class="nav-link link-dark">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#speedometer2"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-dark">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#grid"/>
+                            </svg>
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-dark">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#table"/>
+                            </svg>
+                            Templates
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-dark">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#people-circle"/>
+                            </svg>
+                            Clients
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-dark">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#people-circle"/>
+                            </svg>
+                            Employees
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <div>
+                    <a href="personal-info.html" class="d-flex align-items-center link-dark text-decoration-none">
+                        <img src="../img/logo/headlogo.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                        <strong>Minghao</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--        reminder sidebar-->
+        <div id="myMsgbar" class="sidebar">
+
+            <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 372px;">
+                <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                         class="bi bi-bell-fill" viewBox="0 0 16 16" style="margin-right: 6px">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                    </svg>
+                    <span class="fs-5 fw-semibold">Reminders</span>
+                </div>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeMsg()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                    </svg>
+                </a>
+                <div class="list-group list-group-flush border-bottom scrollarea">
+                    <a href="#" class="list-group-item list-group-item-action active py-3 lh-tight" aria-current="true">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small>Wed</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Tues</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Mon</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Wed</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Mon</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Mon</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Wed</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Tues</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1">List group item heading</strong>
+                            <small class="text-muted">Mon</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and
+                            date.
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--task type area-->
+    <div class="container-fluid bg-light" style="margin-top: 51px; overflow-y: auto">
+
+        <div class="task-type-container">
+            <div class="h3 text-center text-white bg-dark"
+                 style="height: 40px; border-radius: 6px; align-content: center; margin: 10px">Nine Yards <small>(AppCurate)</small>
+            </div>
+
+            <div class="task-type-area container-fluid">
+                <div class="row">
+                    <div class="col-md-6 type-area" style="background-color: #e6e6e6">
+                        <div class="h4 text-center text-white bg-primary" style="width: 100%; border-radius: 5px">
+                            Phase
+                        </div>
+                        <div class="table-responsive bg-light" style="overflow-y: auto; height: 245px">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Num</th>
+                                    <th scope="col">Status</th>
+                                    <th style="width: 30%">Name</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>active</td>
+                                    <td>front-end sign-in page sprint-1 coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 type-area" style="background-color: #e6e6e6">
+                        <div class="h4 text-center text-white bg-success" style="width: 100%; border-radius: 5px">
+                            Creative
+                        </div>
+                        <div class="table-responsive bg-light" style="overflow-y: auto; height: 245px">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Num</th>
+                                    <th scope="col">Status</th>
+                                    <th style="width: 30%">Name</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>active</td>
+                                    <td>front-end sign-in page sprint-1 coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 type-area" style="background-color: #e6e6e6">
+                        <div class="h4 text-center text-white bg-warning" style="width: 100%; border-radius: 5px">
+                            Production
+                        </div>
+                        <div class="table-responsive bg-light" style="overflow-y: auto; height: 245px">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Num</th>
+                                    <th scope="col">Status</th>
+                                    <th style="width: 30%">Name</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>active</td>
+                                    <td>front-end sign-in page sprint-1 coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 type-area" style="background-color: #e6e6e6">
+                        <div class="h4 text-center text-white bg-danger" style="width: 100%; border-radius: 5px">
+                            Financial
+                        </div>
+                        <div class="table-responsive bg-light" style="overflow-y: auto; height: 245px">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Num</th>
+                                    <th scope="col">Status</th>
+                                    <th style="width: 30%">Name</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>active</td>
+                                    <td>front-end sign-in page sprint-1 coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>active</td>
+                                    <td>coding</td>
+                                    <td>10/11/2021</td>
+                                    <td>10/19/2021</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--    Gantt chart module-->
+        <div class="container-fluid">
+            <div class="workspace" id="workSpace"
+                 style="padding:0px; overflow-y:auto; overflow-x:hidden;border:1px solid #e5e5e5; border-radius: 10px; position:relative"></div>
+        </div>
+    </div>
+
+
+</main>
+
+<style>
+    .resEdit {
+        padding: 15px;
+    }
+
+    .resLine {
+        width: 95%;
+        padding: 3px;
+        margin: 5px;
+        border: 1px solid #d0d0d0;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .ganttButtonBar h1 {
+        color: #000000;
+        font-weight: bold;
+        font-size: 28px;
+        margin-left: 10px;
+    }
+
+</style>
+
+<form id="gimmeBack" style="display:none;" action="../gimmeBack.jsp" method="post" target="_blank"><input type="hidden"
+                                                                                                          name="prj"
+                                                                                                          id="gimBaPrj">
+</form>
+
+<script type="text/javascript">
+
+    var ge;
+    $(function () {
+        var canWrite = true; //this is the default for test purposes
+
+        // here starts gantt initialization
+        ge = new GanttMaster();
+        ge.set100OnClose = true;
+
+        ge.shrinkParent = true;
+
+
+        ge.init($("#workSpace"));
+        loadI18n(); //overwrite with localized ones
+
+        //in order to force compute the best-fitting zoom level
+        delete ge.gantt.zoom;
+
+        var projectId = $("meta[name = 'projectId']").attr("content");
+        var project = loadGanttFromServer(projectId);
+
+        if (!project.canWrite)
+            $(".ganttButtonBar button.requireWrite").attr("disabled", "true");
+
+        // ge.loadProject(project);h
+        // ge.checkpoint(); //empty the undo stack
+
+        //initializeHistoryManagement(ge.tasks[0].id);
+    });
+</script>
+
+
+<div id="gantEditorTemplates" style="display:none;">
+    <div class="__template__" type="GANTBUTTONS">
+
+        <div class="ganttButtonBar noprint">
+            <div class="buttons">
+                <button onclick="$('#workSpace').trigger('zoomMinus.gantt'); return false;" class="button textual icon "
+                        title="zoom out"><span class="teamworkIcon">)</span></button>
+                <button onclick="$('#workSpace').trigger('zoomPlus.gantt');return false;" class="button textual icon "
+                        title="zoom in"><span class="teamworkIcon">(</span></button>
+                <span class="ganttButtonSeparator requireCanSeeCriticalPath"></span>
+                <button onclick="ge.splitter.resize(1);return false;" class="button textual icon"><span
+                        class="teamworkIcon">F</span></button>
+                <button onclick="ge.splitter.resize(50);return false;" class="button textual icon"><span
+                        class="teamworkIcon">O</span></button>
+                <button onclick="ge.splitter.resize(100);return false;" class="button textual icon"><span
+                        class="teamworkIcon">R</span></button>
+                <span class="ganttButtonSeparator requireCanSeeCriticalPath"></span>
+                <input type="file" name="load-file" id="load-file">
+                <label for="load-file">Load</label>
+                <button onclick="saveGanttOnServer();" class="button first big requireWrite" title="Save">Calendar
+                    view
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="__template__" type="TASKSEDITHEAD">
+        <!--
+        <table class="gdfTable" cellspacing="0" cellpadding="0">
+          <thead>
+          <tr style="height:40px">
+            <th class="gdfColHeader gdfResizable" style="width:50px;">Num</th>
+            <th class="gdfColHeader gdfResizable" style="width:50px;" title="The status of this task.">Status</th>
+            <th class="gdfColHeader gdfResizable" style="width:100px;" title="The type of this task.">Type</th>
+            <th class="gdfColHeader gdfResizable" style="width:200px;" title="The name of this task.">Name</th>
+            <th class="gdfColHeader gdfResizable"  align="center" style="width:20px;" title="Start date is a milestone."><span class="teamworkIcon" style="font-size: 8px;">^</span></th>
+            <th class="gdfColHeader gdfResizable" style="width:100px;" title="The start date of this task.">Start</th>
+            <th class="gdfColHeader gdfResizable"  align="center" style="width:20px;" title="End date is a milestone."><span class="teamworkIcon" style="font-size: 8px;">^</span></th>
+            <th class="gdfColHeader gdfResizable" style="width:100px;" title="The end date of this task.">End</th>
+            <th class="gdfColHeader gdfResizable" style="width:50px;" title="The duration of this task.">Dur.</th>
+            <th class="gdfColHeader gdfResizable" style="width:30px;" title="The progress of this task.">%</th>
+            <th class="gdfColHeader gdfResizable requireCanSeeDep" style="width:50px;" title="The dependency of this task.">Depe.</th>
+            <th class="gdfColHeader gdfResizable" style="width:100px; text-align: center" title="The assignees of this task.">Assigned to</th>
+            <th class="gdfColHeader gdfResizable" style="width:50px;" title="This task is visible to clients.">Visible</th>
+            <th class="gdfColHeader gdfResizable" style="width:100px;" title="The reminder of this task.">Reminder</th>
+          </tr>
+          </thead>
+        </table>
+        -->
+    </div>
+
+    <div class="__template__" type="TASKROW">
+        <!--
+      <tr id="tid_(#=obj.id#)" taskId="(#=obj.id#)" class="taskEditRow (#=obj.isParent()?'isParent':''#) (#=obj.collapsed?'collapsed':''#)" level="(#=level#)">
+        <th class="gdfCell edit" align="center" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow()+1#)</span> <span class="teamworkIcon" style="font-size:12px;" >e</span></th>
+        <td class="gdfCell noClip" align="center"><div class="taskStatus cvcColorSquare" status="(#=obj.status#)"></div></td>
+
+        <td class="gdfCell"><input type="text" name="type" value="(#=obj.code?obj.code:''#)" placeholder="type"></td>
+        <td class="gdfCell indentCell" style="padding-left:(#=obj.level*10+18#)px;">
+          <div class="exp-controller" align="center"></div>
+          <input type="text" name="name" value="(#=obj.name#)" placeholder="task name" style="pointer-events: none">
+        </td>
+        <td class="gdfCell" align="center"><input type="checkbox" name="startIsMilestone"></td>
+        <td class="gdfCell"><input type="text" name="start"  value="" class="date"></td>
+        <td class="gdfCell" align="center"><input type="checkbox" name="endIsMilestone"></td>
+        <td class="gdfCell"><input type="text" name="end" value="" class="date" style="pointer-events: none"></td>
+        <td class="gdfCell"><input type="text" name="duration" autocomplete="off" value="(#=obj.duration#)"></td>
+        <td class="gdfCell"><input type="text" name="progress" class="validated" entrytype="PERCENTILE" autocomplete="off" value="(#=obj.progress?obj.progress:''#)" (#=obj.progressByWorklog?"readOnly":""#)></td>
+        <td class="gdfCell requireCanSeeDep"><input type="text" name="depends" autocomplete="off" value="(#=obj.depends#)" (#=obj.hasExternalDep?"readonly":""#)></td>
+        <td class="gdfCell taskAssigs">(#=obj.getAssigsString()#)</td>
+        <td class="gdfCell" align="center"><input type="checkbox" name="visible"></td>
+        <td class="gdfCell"><input type="text" name="reminder" value=""></td>
+      </tr>
+        -->
+    </div>
+
+    <div class="__template__" type="TASKEMPTYROW"><!--
+  <tr class="taskEditRow emptyRow" >
+    <th class="gdfCell" align="right"></th>
+    <td class="gdfCell noClip" align="center"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell requireCanSeeDep"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+    <td class="gdfCell"></td>
+  </tr>
+  --></div>
+
+    <div class="__template__" type="TASKBAR"><!--
+  <div class="taskBox taskBoxDiv" taskId="(#=obj.id#)" >
+    <div class="layout (#=obj.hasExternalDep?'extDep':''#)">
+      <div class="taskStatus" status="(#=obj.status#)"></div>
+      <div class="taskProgress" style="width:(#=obj.progress>100?100:obj.progress#)%; background-color:(#=obj.progress>100?'red':'rgb(153,255,51);'#);"></div>
+      <div class="milestone (#=obj.startIsMilestone?'active':''#)" ></div>
+
+      <div class="taskLabel"></div>
+      <div class="milestone end (#=obj.endIsMilestone?'active':''#)" ></div>
+    </div>
+  </div>
+  --></div>
+
+
+    <div class="__template__" type="CHANGE_STATUS"><!--
+    <div class="taskStatusBox">
+    <div class="taskStatus cvcColorSquare" status="STATUS_ACTIVE" title="Active"></div>
+    <div class="taskStatus cvcColorSquare" status="STATUS_DONE" title="Completed"></div>
+    <div class="taskStatus cvcColorSquare" status="STATUS_FAILED" title="Failed"></div>
+    <div class="taskStatus cvcColorSquare" status="STATUS_SUSPENDED" title="Suspended"></div>
+    <div class="taskStatus cvcColorSquare" status="STATUS_WAITING" title="Waiting"></div>
+    <div class="taskStatus cvcColorSquare" status="STATUS_UNDEFINED" title="Undefined"></div>
+    </div>
+  --></div>
+
+
+    <div class="__template__" type="TASK_EDITOR"><!--
+  <div class="ganttTaskEditor">
+    <h2 class="taskData">Task editor</h2>
+    <table  cellspacing="1" cellpadding="5" width="100%" class="taskData table" border="0">
+          <tr>
+        <td width="200" style="height: 80px"  valign="top">
+          <label for="code">Type</label><br>
+          <input type="text" name="code" id="code" value="" size=15 class="formElements" autocomplete='off' maxlength=255 style='width:100%' oldvalue="1">
+        </td>
+        <td colspan="3" valign="top"><label for="name" class="required">Name</label><br><input type="text" name="name" id="name"class="formElements" autocomplete='off' maxlength=255 style='width:100%' value="" required="true" oldvalue="1"></td>
+          </tr>
+
+
+      <tr class="dateRow">
+        <td nowrap="">
+          <div style="position:relative">
+            <label for="start">Start</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="startIsMilestone" name="startIsMilestone" value="yes"> &nbsp;<label for="startIsMilestone">is milestone</label>&nbsp;
+            <br><input type="text" name="start" id="start" size="8" class="formElements dateField validated date" autocomplete="off" maxlength="255" value="" oldvalue="1" entrytype="DATE">
+            <span title="calendar" id="starts_inputDate" class="teamworkIcon openCalendar" onclick="$(this).dateField({inputField:$(this).prevAll(':input:first'),isSearchField:false});">m</span>          </div>
+        </td>
+        <td nowrap="">
+          <label for="end">End</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="checkbox" id="endIsMilestone" name="endIsMilestone" value="yes"> &nbsp;<label for="endIsMilestone">is milestone</label>&nbsp;
+          <br><input type="text" name="end" id="end" size="8" class="formElements dateField validated date" autocomplete="off" maxlength="255" value="" oldvalue="1" entrytype="DATE">
+          <span title="calendar" id="ends_inputDate" class="teamworkIcon openCalendar" onclick="$(this).dateField({inputField:$(this).prevAll(':input:first'),isSearchField:false});">m</span>
+        </td>
+        <td nowrap="" >
+          <label for="duration" class=" ">Days</label><br>
+          <input type="text" name="duration" id="duration" size="4" class="formElements validated durationdays" title="Duration is in working days." autocomplete="off" maxlength="255" value="" oldvalue="1" entrytype="DURATIONDAYS">&nbsp;
+        </td>
+      </tr>
+
+      <tr>
+        <td  colspan="2">
+          <label for="status" class=" ">Status</label><br>
+          <select id="status" name="status" class="taskStatus" status="(#=obj.status#)"  onchange="$(this).attr('STATUS',$(this).val());">
+            <option value="STATUS_ACTIVE" class="taskStatus" status="STATUS_ACTIVE" >active</option>
+            <option value="STATUS_WAITING" class="taskStatus" status="STATUS_WAITING" >waiting</option>
+            <option value="STATUS_SUSPENDED" class="taskStatus" status="STATUS_SUSPENDED" >suspended</option>
+            <option value="STATUS_DONE" class="taskStatus" status="STATUS_DONE" >completed</option>
+            <option value="STATUS_FAILED" class="taskStatus" status="STATUS_FAILED" >failed</option>
+            <option value="STATUS_UNDEFINED" class="taskStatus" status="STATUS_UNDEFINED" >undefined</option>
+          </select>
+        </td>
+
+        <td valign="top" nowrap>
+          <label>Progress</label><br>
+          <input type="text" name="progress" id="progress" size="7" class="formElements validated percentile" autocomplete="off" maxlength="255" value="" oldvalue="1" entrytype="PERCENTILE">
+        </td>
+      </tr>
+
+          </tr>
+          <tr>
+            <td colspan="4">
+              <label for="description">Description</label><br>
+              <textarea rows="3" cols="30" id="description" name="description" class="formElements" style="width:100%"></textarea>
+            </td>
+          </tr>
+        </table>
+
+    <h2>Assignees</h2>
+  <table  cellspacing="1" cellpadding="0" width="100%" id="assigsTable">
+    <tr>
+      <th style="width:100px;">Department</th>
+      <th style="width:70px;">Role</th>
+      <th style="width:30px;">Name</th>
+      <th style="width:30px;" id="addAssig"><span class="teamworkIcon" style="cursor: pointer">+</span></th>
+    </tr>
+  </table>
+
+  <div style="text-align: right; padding-top: 20px">
+    <span id="saveButton" class="button first" onClick="$(this).trigger('saveFullEditor.gantt');">Save</span>
+  </div>
+
+  </div>
+  --></div>
+
+
+    <div class="__template__" type="ASSIGNMENT_ROW"><!--
+  <tr taskId="(#=obj.task.id#)" assId="(#=obj.assig.id#)" class="assigEditRow" >
+    <td ><select name="resourceId"  class="formElements" (#=obj.assig.id.indexOf("tmp_")==0?"":"disabled"#) ></select></td>
+    <td ><select type="select" name="roleId"  class="formElements"></select></td>
+    <td ><input type="text" name="effort" value="(#=getMillisInHoursMinutes(obj.assig.effort)#)" size="5" class="formElements"></td>
+    <td align="center"><span class="teamworkIcon delAssig del" style="cursor: pointer">d</span></td>
+  </tr>
+  --></div>
+
+
+    <div class="__template__" type="RESOURCE_EDITOR"><!--
+  <div class="resourceEditor" style="padding: 5px;">
+
+    <h2>Department editor</h2>
+    <table  cellspacing="1" cellpadding="0" width="100%" id="resourcesTable">
+      <tr>
+        <th style="width:100px;">Name</th>
+        <th style="width:30px;" id="addResource"><span class="teamworkIcon" style="cursor: pointer">+</span></th>
+      </tr>
+    </table>
+
+    <div style="text-align: right; padding-top: 20px"><button id="resSaveButton" class="button big">Save</button></div>
+  </div>
+  --></div>
+
+
+    <div class="__template__" type="RESOURCE_ROW"><!--
+  <tr resId="(#=obj.id#)" class="resRow" >
+    <td ><input type="text" name="name" value="(#=obj.name#)" style="width:100%;" class="formElements"></td>
+    <td align="center"><span class="teamworkIcon delRes del" style="cursor: pointer">d</span></td>
+  </tr>
+  --></div>
+
+
+</div>
+<script type="text/javascript">
+    $.JST.loadDecorator("RESOURCE_ROW", function (resTr, res) {
+        resTr.find(".delRes").click(function () {
+            $(this).closest("tr").remove()
+        });
+    });
+
+    $.JST.loadDecorator("ASSIGNMENT_ROW", function (assigTr, taskAssig) {
+        var resEl = assigTr.find("[name=resourceId]");
+        var opt = $("<option>");
+        resEl.append(opt);
+        for (var i = 0; i < taskAssig.task.master.resources.length; i++) {
+            var res = taskAssig.task.master.resources[i];
+            opt = $("<option>");
+            opt.val(res.id).html(res.name);
+            if (taskAssig.assig.resourceId == res.id)
+                opt.attr("selected", "true");
+            resEl.append(opt);
+        }
+        var roleEl = assigTr.find("[name=roleId]");
+        for (var i = 0; i < taskAssig.task.master.roles.length; i++) {
+            var role = taskAssig.task.master.roles[i];
+            var optr = $("<option>");
+            optr.val(role.id).html(role.name);
+            if (taskAssig.assig.roleId == role.id)
+                optr.attr("selected", "true");
+            roleEl.append(optr);
+        }
+
+        if (taskAssig.task.master.permissions.canWrite && taskAssig.task.canWrite) {
+            assigTr.find(".delAssig").click(function () {
+                var tr = $(this).closest("[assId]").fadeOut(200, function () {
+                    $(this).remove()
+                });
+            });
+        }
+
+    });
+
+    $(document).on("change", "#load-file", function () {
+        var uploadedFile = $("#load-file").prop("files")[0];
+        upload(uploadedFile);
+    });
+
+</script>
+
+<!--Navbar-->
+<script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/sidebar.js"></script>
+
+
+</body>
+</html>
