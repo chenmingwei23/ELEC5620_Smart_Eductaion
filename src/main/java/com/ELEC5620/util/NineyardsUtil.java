@@ -1,6 +1,5 @@
 package com.ELEC5620.util;
 
-import com.ELEC5620.entity.User;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
