@@ -35,8 +35,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000/")
     @PostMapping(value= "/login",produces="application/json;charset=UTF-8")
-
-    public List<Users> logIn(HttpServletResponse response, @RequestBody Map<String, Object> data) {
+    public List<Users> logIn(@RequestBody Map<String, Object> data) {
         List<Users> result = new ArrayList<>();
         String acc = data.get("acc").toString();
         String pwd = data.get("pwd").toString();
@@ -56,4 +55,18 @@ public class UserController {
         }
         return result;
     }
+
+    @PostMapping(value= "/changePwd",produces="application/json;charset=UTF-8")
+    public String changePwd(@RequestBody Map<String, Object> data){
+        long uid = Long.parseLong(data.get("uid").toString());
+        String pwd = data.get("pwd").toString();
+        Integer result = userRepository.iniPwd(pwd,uid);
+        System.out.println(result);
+        if(result == 1){
+        return "success";
+        }else{
+            return "fail";
+        }
+    }
+
 }

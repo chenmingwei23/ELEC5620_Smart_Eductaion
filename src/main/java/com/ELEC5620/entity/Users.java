@@ -84,13 +84,20 @@ public class Users {
 
     public Users(){}
 
-    public Users(String firstName, String lastName, String account, String password, int role, int gender) {
+    public Users(String firstName, String lastName, String account, String password, int role, int gender, String major, String email, String address, String post, String country, String intro, int changPwd) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.account = account;
         this.password = password;
         this.role = role;
         this.gender = gender;
+        this.major = major;
+        this.email = email;
+        this.address = address;
+        this.post = post;
+        this.country = country;
+        this.intro = intro;
+        this.changPwd = changPwd;
     }
 
     public long getId() {
@@ -109,11 +116,11 @@ public class Users {
         this.firstName = firstName;
     }
 
-    public String getLsatName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lsatName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -147,5 +154,61 @@ public class Users {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public int getChangPwd() {
+        return changPwd;
+    }
+
+    public void setChangPwd(int changPwd) {
+        this.changPwd = changPwd;
     }
 }
