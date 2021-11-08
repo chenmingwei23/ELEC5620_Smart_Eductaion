@@ -69,4 +69,11 @@ public class UserController {
         }
     }
 
+    @PostMapping(value= "/getIntro",produces="application/json;charset=UTF-8")
+    public List<Users> getIntro(@RequestBody Map<String, Object> data){
+        String acc = data.get("acc").toString();
+        List<Users> user = new ArrayList<>();
+        user = userRepository.findByAcc(acc);
+        return user;
+    }
 }
