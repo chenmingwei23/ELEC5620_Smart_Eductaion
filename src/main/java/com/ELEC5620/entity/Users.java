@@ -45,7 +45,7 @@ public class Users {
     private String firstName;
 
     @Column(name = "last_name")
-    private String lsatName;
+    private String lastName;
 
     @Column(name = "acc")
     private String account;
@@ -61,11 +61,32 @@ public class Users {
     //1 -- male     0 -- female
     private int gender;
 
+    @Column(name = "major")
+    private String major;
+
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "post")
+    private String post;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "intro")
+    private String intro;
+
+    @Column(name = "changPwd", columnDefinition="tinyint default 0")
+    private int changPwd;
+
     public Users(){}
 
-    public Users(String firstName, String lsatName, String account, String password, int role, int gender) {
+    public Users(String firstName, String lastName, String account, String password, int role, int gender) {
         this.firstName = firstName;
-        this.lsatName = lsatName;
+        this.lastName = lastName;
         this.account = account;
         this.password = password;
         this.role = role;
@@ -89,11 +110,11 @@ public class Users {
     }
 
     public String getLsatName() {
-        return lsatName;
+        return lastName;
     }
 
-    public void setLsatName(String lsatName) {
-        this.lsatName = lsatName;
+    public void setLastName(String lsatName) {
+        this.lastName = lastName;
     }
 
     public String getAccount() {
