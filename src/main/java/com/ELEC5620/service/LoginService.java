@@ -1,10 +1,10 @@
 package com.ELEC5620.service;
 
 import com.ELEC5620.dao.LoginTicketMapper;
-import com.ELEC5620.dao.UserMapper;
+import com.ELEC5620.dao.LoginMapper;
 import com.ELEC5620.entity.LoginTicket;
-import com.ELEC5620.entity.User;
-import com.ELEC5620.util.EmailClient;
+import com.ELEC5620.entity.Users;
+//import com.ELEC5620.util.EmailClient;
 import com.ELEC5620.util.NineyardsUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,39 +15,39 @@ import java.util.*;
 import static com.ELEC5620.util.NineyardConstants.TYPE_Client;
 
 @Service
-public class UserService {
+public class LoginService {
     @Autowired
-    private UserMapper userMapper;
+    private LoginMapper loginMapper;
 
-    @Autowired
-    private EmailClient emailClient;
+//    @Autowired
+//    private EmailClient emailClient;
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
 
-    public User find(int id) {
-        return userMapper.selectById(id);
+    public Users find(int id) {
+        return loginMapper.selectById(id);
     }
 
-    public Map<String, Object> register(User user) {
+    public Map<String, Object> register(Users users) {
         Map<String, Object> map = new HashMap<>();
         //空值处理
-        if (user == null) {
+        if (users == null) {
             throw new IllegalArgumentException("user is null");
         }
-        if (StringUtils.isBlank(user.getFirstName())) {
+        if (StringUtils.isBlank(users.getFirstName())) {
             map.put("usernameMsg", "first name is null");
             return map;
         }
-        if (StringUtils.isBlank(user.getLastName())) {
+        if (StringUtils.isBlank(users.getLsatName())) {
             map.put("usernameMsg", "second name is null");
             return map;
         }
-        if (StringUtils.isBlank(user.getPassword())) {
+        if (StringUtils.isBlank(users.getPassword())) {
             map.put("passwordMsg", "password is null");
             return map;
         }
-        if (StringUtils.isBlank(user.getEmail())) {
+        if (StringUtils.isBlank(users.getAccount())) {
             map.put("emailMsg", "email is null");
             return map;
         }
@@ -56,32 +56,32 @@ public class UserService {
 //            return map;
 //        }
 
-        User u = userMapper.selectByEmail(user.getEmail());
+        Users u = loginMapper.selectByEmail(users.getAccount());
         if (u != null) {
             map.put("emailMsg", "email is already taken");
             return map;
         }
-        insertUser(user);
+        insertUser(users);
         return map;
     }
 
     public Map<String, Object> login(String email, String password, int expiredSeconds) {
         Map<String, Object> map = new HashMap<>();
 
-        User user = userMapper.selectByEmail(email);
-        if (user == null) {
+        Users users = loginMapper.selectByEmail(email);
+        if (users == null) {
             map.put("userEmailMsg", "account is not exist");
             return map;
         }
 
-        if (!user.getPassword().equals(password)) {
+        if (!users.getPassword().equals(password)) {
             map.put("passwordMsg", "incorrect password");
             return map;
         }
 
         // 生成登陆凭证
         LoginTicket loginTicket = new LoginTicket();
-        loginTicket.setUserId(user.getId());
+        loginTicket.setUserId(users.getId());
         loginTicket.setTicket(NineyardsUtil.generateUUID());
         loginTicket.setStatus(0);
         loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
@@ -102,9 +102,9 @@ public class UserService {
             map.put("passwordMsg", "Password can't be empty!");
             return map;
         }
-        User user = userMapper.selectById(decodeUserId(code));
-        user.setPassword(password);
-        userMapper.updateUser(user);
+        Users users = loginMapper.selectById(decodeUserId(code));
+        users.setPassword(password);
+        loginMapper.updateUser(users);
         return map;
     }
 
@@ -135,45 +135,45 @@ public class UserService {
         return sb.toString();
     }
 
-    public User findById(int userId) {
-        return userMapper.selectById(userId);
+    public Users findById(int userId) {
+        return loginMapper.selectById(userId);
     }
 
-    public User findByEmail(String email) {
-        return userMapper.selectByEmail(email);
+    public Users findByEmail(String email) {
+        return loginMapper.selectByEmail(email);
     }
 
-    public List<User> selectSpecificTypeUser(int companyId, int type) {
-        List<User> pendingToFilter = userMapper.selectByCompany(companyId);
-        List<User> resUser = new ArrayList<>();
-        for (User user : pendingToFilter) {
-            if (user.getType() == type) {
-                resUser.add(user);
+    public List<Users> selectSpecificTypeUser(int companyId, int type) {
+        List<Users> pendingToFilter = loginMapper.selectByCompany(companyId);
+        List<Users> resUsers = new ArrayList<>();
+        for (Users users : pendingToFilter) {
+            if (users.getRole() == type) {
+                resUsers.add(users);
             }
         }
-        return resUser;
+        return resUsers;
     }
 
-    public List<User> selectClient(int pmId){
-        List<User> users = userMapper.selectUserByPMId(pmId);
-        List<User> clients = new ArrayList<>();
-        for (User user: users){
-            if (user.getType() == TYPE_Client){
+    public List<Users> selectClient(int pmId){
+        List<Users> users = loginMapper.selectUserByPMId(pmId);
+        List<Users> clients = new ArrayList<>();
+        for (Users user: users){
+            if (user.getRole() == TYPE_Client){
                 clients.add(user);
             }
         }
         return clients;
     }
 
-    public void insertUser(User user) {
-        userMapper.insertUser(user);
+    public void insertUser(Users users) {
+        loginMapper.insertUser(users);
     }
 
     public int deleteUser(int id) {
-        return userMapper.deleteById(id);
+        return loginMapper.deleteById(id);
     }
 
-    public void updateUser(User user) {
-        userMapper.updateUser(user);
+    public void updateUser(Users users) {
+        loginMapper.updateUser(users);
     }
 }

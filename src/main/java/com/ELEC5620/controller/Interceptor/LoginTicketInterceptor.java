@@ -2,9 +2,9 @@ package com.ELEC5620.controller.Interceptor;
 
 
 import com.ELEC5620.dao.LoginTicketMapper;
-import com.ELEC5620.dao.UserMapper;
+import com.ELEC5620.dao.LoginMapper;
 import com.ELEC5620.entity.LoginTicket;
-import com.ELEC5620.entity.User;
+import com.ELEC5620.entity.Users;
 import com.ELEC5620.util.CookieUtil;
 import com.ELEC5620.util.HostHolder;
 import com.ELEC5620.util.NineyardConstants;
@@ -24,7 +24,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
     private LoginTicketMapper loginTicketMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private LoginMapper loginMapper;
 
 
     @Autowired
@@ -37,13 +37,13 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
         if (ticket != null) {
             LoginTicket loginTicket = loginTicketMapper.selectByTicket(ticket);
             if (loginTicket != null && loginTicket.getStatus() == 0 && loginTicket.getExpired().after(new Date())) {
-                User user = userMapper.selectById(loginTicket.getUserId());
-                hostHolder.setUser(user);
-                String url = request.getContextPath() + "/user/create-company/" + user.getId();
-                if (user.getCompanyId() < 0 && !request.getRequestURI().equals(url) && user.getType() == NineyardConstants.TYPE_PM) {
-                    response.sendRedirect(request.getContextPath() + "/user/create-company/" + user.getId());
-                    return false;
-                }
+                Users users = loginMapper.selectById(loginTicket.getUserId());
+                hostHolder.setUser(users);
+                String url = request.getContextPath() + "/user/create-company/" + users.getId();
+//                if (users.getCompanyId() < 0 && !request.getRequestURI().equals(url) && users.getType() == NineyardConstants.TYPE_PM) {
+//                    response.sendRedirect(request.getContextPath() + "/user/create-company/" + users.getId());
+//                    return false;
+//                }
             }
         }
         return true;
@@ -51,9 +51,9 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        User user = hostHolder.getUser();
-        if (user != null && modelAndView != null) {
-            modelAndView.addObject("loginUser", user);
+        Users users = hostHolder.getUser();
+        if (users != null && modelAndView != null) {
+            modelAndView.addObject("loginUser", users);
         }
     }
 
