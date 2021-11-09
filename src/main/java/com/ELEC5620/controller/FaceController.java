@@ -2,7 +2,7 @@ package com.ELEC5620.controller;
 
 import com.ELEC5620.common.FaceApi;
 import com.ELEC5620.entity.Users;
-import com.baidu.ai.aip.utils.Base64Util;
+import com.baidu.ai.api.utils.Base64Util;
 import com.baidu.aip.face.AipFace;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ public class FaceController {
 
     @PostMapping(value= "/postFace",produces="application/json;charset=UTF-8")
     public String getFaceFromFront(@RequestBody Map<String, Object> data) throws IOException {
-        byte[] bytes = Base64Util.base64ToImgByteArray(data.get("imagebase64").toString());
+        // byte[] bytes = Base64Util.base64ToImgByteArray(data.get("imagebase64").toString());
         String img = data.get("imagebase64").toString();
         String[] temp;
         temp = img.split(",");

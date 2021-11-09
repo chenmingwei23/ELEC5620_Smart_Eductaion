@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.*;
     //@PostMapping(path = "/test" )
+public class UserController {
+    UserRepository userRepository;
+
     @PostMapping(value= "/test",produces="application/json;charset=UTF-8")
     public String resetPassword(@RequestBody Map<String, Object> data) {
         System.out.println(data.get("acc"));
@@ -72,7 +76,7 @@ import java.util.*;
     }
 
     @PostMapping(value= "/addImg",produces="application/json;charset=UTF-8")
-    public String addImg(@RequestBody Map<String, Object> data){
+    public String addImg(@RequestBody Map<String, Object> data) {
         String id = data.get("uid").toString();
         String img = data.get("img").toString();
         //去掉图片头，不然图片报错222203
@@ -81,25 +85,29 @@ import java.util.*;
 //      System.out.println(temp[1]);
         String image = temp[1];
         String name = data.get("name").toString();
-        System.out.println(id+ "" +image);
+        System.out.println(id + "" + image);
         //add to baidu face bank
         FaceApi faceApi = new FaceApi();
-        String returnResult = FaceApi.add(image,"elec5620",id,name);
+        String returnResult = FaceApi.add(image, "elec5620", id, name);
         Gson g = new Gson();
-        JsonObject obj = g.fromJson(returnResult,JsonObject.class);
+        JsonObject obj = g.fromJson(returnResult, JsonObject.class);
         System.out.println(obj.get("error_code"));
         String error_code = obj.get("error_code").toString();
-        if(Objects.equals(error_code, "0")){
+        if (Objects.equals(error_code, "0")) {
             JsonObject obj_result = obj.get("result").getAsJsonObject();
             String face_token = obj_result.get("face_token").toString();
             long sid = Long.parseLong(data.get("uid").toString());
             //add info to db
-            Integer result = userRepository.updateImage(sid,face_token,sid,name);
+            Integer result = userRepository.updateImage(sid, face_token, sid, name);
             //update img in user table
             Integer result2 = userRepository.updateImgInUser(sid);
-            if(result == 1 && result2 == 1){
-            return "success";}else{return "fail";}
-        }else{
+            if (result == 1 && result2 == 1) {
+                return "success";
+            } else {
+                return "fail";
+            }
+        } else {
             return "fail";
         }
+    }
 }

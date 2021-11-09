@@ -3,8 +3,8 @@ package com.ELEC5620.common;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.baidu.ai.aip.utils.GsonUtils;
-import com.baidu.ai.aip.utils.HttpUtil;
+import com.baidu.ai.api.utils.GsonUtils;
+import com.baidu.ai.api.utils.HttpUtil;
 import com.baidu.aip.face.AipFace;
 import org.springframework.stereotype.Component;
 
@@ -28,13 +28,13 @@ public class FaceApi {
             map.put("image_type", "BASE64");
             map.put("quality_control", "LOW");
 
-            String param = com.baidu.ai.aip.utils.GsonUtils.toJson(map);
+            String param = com.baidu.ai.api.utils.GsonUtils.toJson(map);
 
             // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
             GetAuth getAuth = new GetAuth();
             String accessToken = getAuth.getToken("UwaZ3Xj5HZQB3DNk1aeVfI5G","TIKz3KsqFLgfUu4RAOWBzjGZ0FB4GMqO");
 
-            String result = com.baidu.ai.aip.utils.HttpUtil.post(url, accessToken, "application/json", param);
+            String result = com.baidu.ai.api.utils.HttpUtil.post(url, accessToken, "application/json", param);
             System.out.println(result);
             return result;
         } catch (Exception e) {

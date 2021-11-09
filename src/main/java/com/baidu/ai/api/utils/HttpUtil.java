@@ -1,4 +1,4 @@
-package com.baidu.ai.aip.utils;
+package com.baidu.ai.api.utils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
