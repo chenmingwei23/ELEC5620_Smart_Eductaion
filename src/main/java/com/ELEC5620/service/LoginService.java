@@ -39,7 +39,7 @@ public class LoginService {
             map.put("usernameMsg", "first name is null");
             return map;
         }
-        if (StringUtils.isBlank(users.getLsatName())) {
+        if (StringUtils.isBlank(users.getLastName())) {
             map.put("usernameMsg", "second name is null");
             return map;
         }

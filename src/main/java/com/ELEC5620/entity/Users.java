@@ -45,12 +45,12 @@ public class Users {
     private String firstName;
 
     @Column(name = "last_name")
-    private String lsatName;
+    private String lastName;
 
-    @Column(name = "acc")
+    @Column(name = "acc") //前端自己生成
     private String account;
 
-    @Column(name = "pwd")
+    @Column(name = "pwd", columnDefinition="tinyint default 0")
     private String password;
 
     @Column(name = "role")
@@ -61,15 +61,47 @@ public class Users {
     //1 -- male     0 -- female
     private int gender;
 
+    @Column(name = "major")
+    private String major;
+
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "post")
+    private String post;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "intro")
+    private String intro;
+
+    @Column(name = "changPwd", columnDefinition="tinyint default 0")
+    private int changPwd;
+
+    @Column(name = "image", columnDefinition="tinyint default 0") //0代表没照片，1代表有照片
+    private int image;
+
     public Users(){}
 
-    public Users(String firstName, String lsatName, String account, String password, int role, int gender) {
+    public Users(String firstName, String lastName, String account, String password, int role, int gender, String major, String email, String address, String post, String country, String intro, int changPwd, int image) {
         this.firstName = firstName;
-        this.lsatName = lsatName;
+        this.lastName = lastName;
         this.account = account;
         this.password = password;
         this.role = role;
         this.gender = gender;
+        this.major = major;
+        this.email = email;
+        this.address = address;
+        this.post = post;
+        this.country = country;
+        this.intro = intro;
+        this.changPwd = changPwd;
+        this.image = image;
     }
 
     public long getId() {
@@ -88,12 +120,12 @@ public class Users {
         this.firstName = firstName;
     }
 
-    public String getLsatName() {
-        return lsatName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLsatName(String lsatName) {
-        this.lsatName = lsatName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAccount() {
@@ -126,5 +158,69 @@ public class Users {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public int getChangPwd() {
+        return changPwd;
+    }
+
+    public void setChangPwd(int changPwd) {
+        this.changPwd = changPwd;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }

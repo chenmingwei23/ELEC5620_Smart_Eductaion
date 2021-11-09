@@ -48,13 +48,13 @@ public interface NineyardConstants {
     /**
      * Department
      */
-    List<String> ALL_DEPARTMENT = new ArrayList<>(List.of(new String[]{"Manage", "Design", "Develop", "Financial", "Client", "QA"}));
+//    List<String> ALL_DEPARTMENT = new ArrayList<>(List.of(new String[]{"Manage", "Design", "Develop", "Financial", "Client", "QA"}));
 
     /**
      * Position
      */
-    List<String> ALL_POSITION = new ArrayList<>(List.of(new String[]{"Project manager", "Product manager", "UI designer",
-            "Front-end developer", "Back-end developer", "Tester" , "Accountant", "Client contact", "Operator"}));
+//    List<String> ALL_POSITION = new ArrayList<>(List.of(new String[]{"Project manager", "Product manager", "UI designer",
+//            "Front-end developer", "Back-end developer", "Tester" , "Accountant", "Client contact", "Operator"}));
 
     /**
      * 默认状态的登陆凭证的超时时间
