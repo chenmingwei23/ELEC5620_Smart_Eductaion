@@ -1,43 +1,21 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE DATABASE IF NOT EXISTS nineyards;
-USE nineyards;
+CREATE DATABASE IF NOT EXISTS smart_education;
+USE smart_education;
 
 -- ----------------------------
 -- Table structure for action
 -- ----------------------------
-DROP TABLE IF EXISTS `action`;
-CREATE TABLE `action` (
-                          `id` int,
-                          `backend_id` int NOT NULL AUTO_INCREMENT,
-                          `name` varchar(50) DEFAULT NULL,
-                          `progress` int DEFAULT NULL,
-                          `progress_by_work_log` tinyint(1) DEFAULT NULL,
-                          `relevance` int DEFAULT NULL,
-                          `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '0- normal; 1- financial; 2..3..',
-                          `type_id` varchar(20) DEFAULT NULL,
-                          `description` varchar(255) DEFAULT NULL,
-                          `code` varchar(60) DEFAULT NULL,
-                          `level` int DEFAULT NULL,
-                          `status` varchar(50) DEFAULT NULL,
-                          `depends` varchar(50) DEFAULT NULL,
-                          `start` bigint DEFAULT NULL,
-                          `duration` int DEFAULT NULL,
-                          `end` bigint DEFAULT NULL,
-                          `start_is_milestone` tinyint(1) DEFAULT NULL COMMENT '0- normal; 1- milestone;',
-                          `end_is_milestone` tinyint(1) DEFAULT NULL COMMENT '0- normal; 1- milestone;',
-                          `collapsed` tinyint(1) DEFAULT NULL,
-                          `visible` tinyint(1) DEFAULT NULL,
-                          `can_write` tinyint(1) DEFAULT NULL,
-                          `can_add` tinyint(1) DEFAULT NULL,
-                          `can_delete` tinyint(1) DEFAULT NULL,
-                          `can_add_issue` tinyint(1) DEFAULT NULL,
-                          `assigs` varchar(255) DEFAULT NULL,
-                          `has_child` tinyint(1) DEFAULT NULL,
-                          `project_id` int DEFAULT NULL,
-                          PRIMARY KEY (`backend_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+                           `id` int NOT NULL AUTO_INCREMENT,
+                           `serve_course_id` int DEFAULT NULL,
+                           `name` varchar(45) NOT NULL,
+                           `create_time` timestamp NULL DEFAULT NULL,
+                           PRIMARY KEY (`id`),
+                           UNIQUE KEY `abn_UNIQUE` (`abn`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Records of action
