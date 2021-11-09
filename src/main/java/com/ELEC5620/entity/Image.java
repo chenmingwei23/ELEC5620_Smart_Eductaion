@@ -18,13 +18,17 @@ public class Image {
     @Column(name = "face_token")
     private String face_token;
 
+    @Column(name = "img_str")
+    private String img_str;
+
     public Image() {
     }
 
-    public Image(long uid, String uname, String face_token) {
+    public Image(long uid, String uname, String face_token, String img_str) {
         this.uid = uid;
         this.uname = uname;
         this.face_token = face_token;
+        this.img_str = img_str;
     }
 
     public long getId() {
@@ -57,5 +61,13 @@ public class Image {
 
     public void setFace_token(String face_token) {
         this.face_token = face_token;
+    }
+
+    public String getImg_str() {
+        return img_str;
+    }
+
+    public void setImg_str(String img_str) {
+        this.img_str = img_str;
     }
 }

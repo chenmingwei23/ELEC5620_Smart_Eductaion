@@ -1,5 +1,9 @@
 package com.baidu.ai.aip.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * Base64 工具类
  */
@@ -61,5 +65,28 @@ public class Base64Util {
         }
 
         return to.toString();
+    }
+
+    public static byte[] toByteArray(InputStream input) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n = 0;
+        while (-1 != (n = input.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        return output.toByteArray();
+    }
+    public static byte[] base64ToImgByteArray(String base64) throws IOException{
+        sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();
+        //因为参数base64来源不一样，需要将附件数据替换清空掉。如果此入参来自canvas.toDataURL("image/png");
+        base64 = base64.replaceAll("data:image/jpeg;base64,", "");
+        //base64解码并转为二进制数组
+        byte[] bytes = decoder.decodeBuffer(base64);
+        for (int i = 0; i < bytes.length; ++i) {
+            if (bytes[i] < 0) {// 调整异常数据
+                bytes[i] += 256;
+            }
+        }
+        return bytes;
     }
 }

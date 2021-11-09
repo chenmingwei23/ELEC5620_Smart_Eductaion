@@ -1,18 +1,13 @@
 package com.ELEC5620.controller;
 
-import com.ELEC5620.common.FaceRegister;
+import com.ELEC5620.common.FaceApi;
 import com.ELEC5620.entity.Users;
 import com.ELEC5620.repository.UserRepository;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 
@@ -104,8 +99,8 @@ public class UserController {
         String name = data.get("name").toString();
         System.out.println(id+ "" +image);
         //add to baidu face bank
-        FaceRegister faceRegister = new FaceRegister();
-        String returnResult = FaceRegister.add(image,"elec5620",id,name);
+        FaceApi faceApi = new FaceApi();
+        String returnResult = FaceApi.add(image,"elec5620",id,name);
         Gson g = new Gson();
         JsonObject obj = g.fromJson(returnResult,JsonObject.class);
         System.out.println(obj.get("error_code"));
