@@ -47,10 +47,10 @@ public class Users {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "acc")
+    @Column(name = "acc") //前端自己生成
     private String account;
 
-    @Column(name = "pwd")
+    @Column(name = "pwd", columnDefinition="tinyint default 0")
     private String password;
 
     @Column(name = "role")
@@ -82,9 +82,12 @@ public class Users {
     @Column(name = "changPwd", columnDefinition="tinyint default 0")
     private int changPwd;
 
+    @Column(name = "image", columnDefinition="tinyint default 0") //0代表没照片，1代表有照片
+    private int image;
+
     public Users(){}
 
-    public Users(String firstName, String lastName, String account, String password, int role, int gender, String major, String email, String address, String post, String country, String intro, int changPwd) {
+    public Users(String firstName, String lastName, String account, String password, int role, int gender, String major, String email, String address, String post, String country, String intro, int changPwd, int image) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.account = account;
@@ -98,6 +101,7 @@ public class Users {
         this.country = country;
         this.intro = intro;
         this.changPwd = changPwd;
+        this.image = image;
     }
 
     public long getId() {
@@ -210,5 +214,13 @@ public class Users {
 
     public void setChangPwd(int changPwd) {
         this.changPwd = changPwd;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }
