@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS smart_education;
 USE smart_education;
 
 -- ----------------------------
--- Table structure for action
+-- Table structure for course
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
@@ -24,13 +24,36 @@ INSERT INTO `course` VALUES (3, 'elec5620');
 COMMIT;
 
 -- ----------------------------
--- Table structure for company
+-- Table structure for content
+-- ----------------------------
+DROP TABLE IF EXISTS `content`;
+CREATE TABLE `content` (
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `content` varchar(100),
+                          `type` int NOT NULL,
+                          `topic_id` int NOT NULL,
+                          `topic_name` varchar(100),
+                          `user_name` varchar(100),
+                          `user_id` int,
+                          PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+BEGIN;
+INSERT INTO `content` VALUES (1, 'This  is a good day!', 0, 1, 'Title1',  'student1', 1);
+COMMIT;
+
+
+-- ----------------------------
+-- Table structure for topic
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
                            `id` int NOT NULL AUTO_INCREMENT,
                            `course_id` int DEFAULT NULL,
+                           `course_name` varchar(45) DEFAULT NULL,
                            `title` varchar(45),
                            `content` varchar(100),
                            `author_id` int,
@@ -42,7 +65,7 @@ CREATE TABLE `topic` (
 -- Records of topic
 -- ----------------------------
 BEGIN;
-INSERT INTO `topic` VALUES (1, '1','Title1','Content1',1, 'Student1');
+INSERT INTO `topic` VALUES (1, 1,'elec5618','Title1','Content1',1, 'Student1');
 COMMIT;
 
 -- ----------------------------
