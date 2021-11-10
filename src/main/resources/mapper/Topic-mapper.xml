@@ -8,44 +8,41 @@
 
     <!--注意！这里要按照数据库里的字段来写，而不是entity-->
     <sql id="insertFields">
-        name
+        title, content, author_id, author_name
     </sql>
 
     <sql id="selectFields">
-       id, name
+        id, name, content, author_id, author_name
     </sql>
 
-    <select id="selectById" resultType="com.ELEC5620.entity.Courses">
-        select
-        <include refid="selectFields"></include>
-        from course
-        where id = #{id}
-    </select>
-
-    <select id="getAllTopics" resultType="com.ELEC5620.entity.Topic">
+    <select id="selectById" resultType="com.ELEC5620.entity.Topic">
         select
         <include refid="selectFields"></include>
         from topic
-        where courseId = #{course_id}
+        where id = #{id}
     </select>
 
+
     <!-- id: 对应UserMapper里面那个函数， parameterType: 对应的Entity， keyProperty：主键-->
-    <insert id="insertCourse" parameterType="com.ELEC5620.entity.Courses" keyProperty="id">
-        insert into course (<include refid="insertFields"></include>)
-        values(#{name})
+    <insert id="insertTopic" parameterType="com.ELEC5620.entity.Topic" keyProperty="id">
+        insert into topic (<include refid="insertFields"></include>)
+        values(#{title}, #{content}, #{author_id}, #{author_name})
     </insert>
 
-    <update id="updateCourse" parameterType="com.ELEC5620.entity.Courses">
-        UPDATE course
+    <update id="updateTopic" parameterType="com.ELEC5620.entity.Topic">
+        UPDATE topic
         <trim prefix="set" suffixOverrides=",">
-            <if test="status!=null">name=#{name},</if>
+            <if test="status!=null">title=#{title},</if>
+            <if test="status!=null">content=#{content},</if>
+            <if test="status!=null">author_id=#{authorId},</if>
+            <if test="status!=null">author_name=#{authorName},</if>
         </trim>
         WHERE id=#{id}
     </update>
 
     <delete id="deleteById">
         DELETE
-        FROM course
+        FROM topic
         WHERE id = #{id}
     </delete>
 
