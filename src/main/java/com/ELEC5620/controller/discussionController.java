@@ -3,10 +3,7 @@ package com.ELEC5620.controller;
 import com.ELEC5620.dao.ContentMapper;
 import com.ELEC5620.dao.CourseMapper;
 import com.ELEC5620.dao.TopicMapper;
-import com.ELEC5620.entity.Content;
-import com.ELEC5620.entity.Courses;
-import com.ELEC5620.entity.Discussion;
-import com.ELEC5620.entity.Topic;
+import com.ELEC5620.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +24,12 @@ public class discussionController {
 
     @Autowired
     ContentMapper contentMapper;
+
+    @GetMapping("/getAllCourses")
+    public List<Courses> getAllCourses(){
+        List<Courses> all = courseMapper.getAllCourses();
+        return all;
+    }
 
     @GetMapping(value= "/course",produces="application/json;charset=UTF-8")
     public List<Topic> getTopic(@RequestParam String courseName){;

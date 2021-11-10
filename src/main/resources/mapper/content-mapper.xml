@@ -14,6 +14,7 @@
         id, content, type, topic_id, topic_name, user_name, user_id
     </sql>
 
+
     <select id="selectByTopicName" resultType="com.ELEC5620.entity.Content">
         select
         <include refid="selectFields"></include>

@@ -22,6 +22,12 @@
         where id = #{id}
     </select>
 
+    <select id="getAllCourses" resultType="com.ELEC5620.entity.Courses">
+        select
+        <include refid="selectFields"></include>
+        from course
+    </select>
+
 
     <!-- id: 对应UserMapper里面那个函数， parameterType: 对应的Entity， keyProperty：主键-->
     <insert id="insertCourse" parameterType="com.ELEC5620.entity.Courses" keyProperty="id">

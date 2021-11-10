@@ -12,6 +12,8 @@ public interface CourseMapper {
 
     Courses selectById(int id);
 
+    List<Courses> getAllCourses();
+
     List<Topic> getAllTopics(int id);
 
     int insertCourse(Courses courses);
