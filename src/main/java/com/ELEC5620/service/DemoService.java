@@ -33,8 +33,8 @@ public class DemoService {
         return demoMapper.selectById(id);
     }
 
-    public Map<String, Object> addDemo(Demo demo){
-        demoMapper.insertDemo(demo);
-        return Map.of("userMsg", "Put user success!");
-    }
+//    public Map<String, Object> addDemo(Demo demo){
+//        demoMapper.insertDemo(demo);
+//        return Map.of("userMsg", "Put user success!");
+//    }
 }
