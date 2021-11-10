@@ -10,7 +10,6 @@ USE smart_education;
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
                            `id` int NOT NULL AUTO_INCREMENT,
-                           `serve_course_id` int DEFAULT NULL,
                            `name` varchar(45) NOT NULL,
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
@@ -19,17 +18,19 @@ CREATE TABLE `course` (
 -- Records of course
 -- ----------------------------
 BEGIN;
-INSERT INTO `course` VALUES (1, 0, 'elec5618');
-INSERT INTO `course` VALUES (2, 1, 'elec5619');
-INSERT INTO `course` VALUES (3, 2, 'elec5620');
+INSERT INTO `course` VALUES (1, 'elec5618');
+INSERT INTO `course` VALUES (2, 'elec5619');
+INSERT INTO `course` VALUES (3, 'elec5620');
 COMMIT;
 
 -- ----------------------------
 -- Table structure for company
+
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
                            `id` int NOT NULL AUTO_INCREMENT,
+                           `course_id` int DEFAULT NULL,
                            `title` varchar(45),
                            `content` varchar(100),
                            `author_id` int,
@@ -41,7 +42,7 @@ CREATE TABLE `topic` (
 -- Records of topic
 -- ----------------------------
 BEGIN;
-INSERT INTO `topic` VALUES (1, 'Title1', 'Content1',1, 'Student1');
+INSERT INTO `topic` VALUES (1, '1','Title1','Content1',1, 'Student1');
 COMMIT;
 
 -- ----------------------------
@@ -70,27 +71,6 @@ CREATE TABLE `demo` (
 -- ----------------------------
 BEGIN;
 COMMIT;
-
--- ----------------------------
--- Table structure for login_ticket
--- ----------------------------
-DROP TABLE IF EXISTS `login_ticket`;
-CREATE TABLE `login_ticket` (
-                                `id` int NOT NULL AUTO_INCREMENT,
-                                `user_id` int NOT NULL,
-                                `ticket` varchar(45) NOT NULL,
-                                `status` int DEFAULT '0' COMMENT '0-有效; 1-无效;',
-                                `expired` timestamp NOT NULL,
-                                PRIMARY KEY (`id`),
-                                KEY `index_ticket` (`ticket`(20))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- ----------------------------
--- Records of login_ticket
--- ----------------------------
-BEGIN;
-COMMIT;
-
 
 -- ----------------------------
 -- Table structure for QRTZ_BLOB_TRIGGERS
@@ -267,64 +247,5 @@ CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
 
 commit;
 
--- ----------------------------
--- Table structure for reminder
--- ----------------------------
-DROP TABLE IF EXISTS `reminder`;
-CREATE TABLE `reminder` (
-                            `id` int NOT NULL AUTO_INCREMENT,
-                            `user_id` int NOT NULL,
-                            `status` int NOT NULL COMMENT '0- Wait to notify; 1- Deleted; 2 - Notified',
-                            `phase_id` int NOT NULL,
-                            `title` varchar(100) DEFAULT NULL,
-                            `description` varchar(200) DEFAULT NULL,
-                            `notify_time` timestamp NOT NULL,
-                            `create_time` timestamp NOT NULL,
-                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- ----------------------------
--- Records of reminder
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-                        `id` int NOT NULL AUTO_INCREMENT,
-                        `pm_id` int DEFAULT NULL,
-                        `company_id` int DEFAULT NULL,
-                        `type` int NOT NULL COMMENT '0- Project Member; 1- Project Manager; 2- Client;',
-                        `status` int DEFAULT NULL COMMENT '0- Active; 1- Deleted;',
-                        `company_name` varchar(45) DEFAULT NULL,
-                        `first_name` varchar(45) NOT NULL,
-                        `last_name` varchar(45) NOT NULL,
-                        `department` varchar(45) DEFAULT NULL,
-                        `position` varchar(45) DEFAULT NULL,
-                        `email` varchar(45) NOT NULL,
-                        `other_contact_name` varchar(45) DEFAULT NULL,
-                        `other_contact_number` varchar(45) DEFAULT NULL,
-                        `landline` varchar(45) DEFAULT NULL,
-                        `password` varchar(45) NOT NULL,
-                        `address` varchar(45) DEFAULT NULL,
-                        `mobile` varchar(45) DEFAULT NULL,
-                        `create_time` timestamp NULL DEFAULT NULL,
-                        PRIMARY KEY (`id`),
-                        UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-BEGIN;
-INSERT INTO `user` VALUES (1, 1, 1, 0, 0, 'Tiktok','mananger1', 'system', 'dev', 'manager', '123@gmail.com', 'song', '123456', '456789', '123', 'sweethome', '123456789', '2019-04-17 09:11:28');
-INSERT INTO `user` VALUES (2, 2, 2, 0, 0, 'app123','mananger2', 'system', 'dev', 'manager', '124@gmail.com', 'song', '123456', '456789', '123', 'sweethome', '123456789', '2019-04-17 09:11:28');
-INSERT INTO `user` VALUES (3, 1, 1, 1, 0, 'fb123','employ1', 'system', 'dev', 'employ', '456@gmail.com', 'song', '123456', '456789', '123', 'sweethome', '123456789', '2019-04-17 09:11:28');
-INSERT INTO `user` VALUES (4, 1, 1, 1, 0, 'app123','employ2', 'system', 'ops', 'employ', '789@gmail.com', 'song', '123456', '456789', '123', 'sweethome', '123456789', '2019-04-17 09:11:28');
-INSERT INTO `user` VALUES (5, 1, 3, 2, 0, 'app123','client1', 'system', 'management', 'PD', '135@gmail.com', 'song', '123456', '456789', '123', 'sweethome', '123456789', '2019-04-17 09:11:28');
-COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
