@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Content {
 
+    int id;
     String content;
-    String type; // 0: content, 1: reply, 2: comment
+    int type; // 0: content, 1: reply, 2: comment
     int topicId;
     String topicName;
     String userName;
