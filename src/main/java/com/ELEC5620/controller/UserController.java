@@ -9,22 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
-
-@RestController
-@RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:3000/")
-public class UserController {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    //getAllUsers
-    @GetMapping("/getAllUsers")
-    public List<Users> getAllUser(){
-        return userRepository.findAll();
-    }
-
     //@PostMapping(path = "/test" )
     @PostMapping(value= "/test",produces="application/json;charset=UTF-8")
     public String resetPassword(@RequestBody Map<String, Object> data) {
@@ -118,5 +102,4 @@ public class UserController {
         }else{
             return "fail";
         }
-    }
 }

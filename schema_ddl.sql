@@ -1,75 +1,47 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE DATABASE IF NOT EXISTS nineyards;
-USE nineyards;
+CREATE DATABASE IF NOT EXISTS smart_education;
+USE smart_education;
 
 -- ----------------------------
 -- Table structure for action
 -- ----------------------------
-DROP TABLE IF EXISTS `action`;
-CREATE TABLE `action` (
-                          `id` int,
-                          `backend_id` int NOT NULL AUTO_INCREMENT,
-                          `name` varchar(50) DEFAULT NULL,
-                          `progress` int DEFAULT NULL,
-                          `progress_by_work_log` tinyint(1) DEFAULT NULL,
-                          `relevance` int DEFAULT NULL,
-                          `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '0- normal; 1- financial; 2..3..',
-                          `type_id` varchar(20) DEFAULT NULL,
-                          `description` varchar(255) DEFAULT NULL,
-                          `code` varchar(60) DEFAULT NULL,
-                          `level` int DEFAULT NULL,
-                          `status` varchar(50) DEFAULT NULL,
-                          `depends` varchar(50) DEFAULT NULL,
-                          `start` bigint DEFAULT NULL,
-                          `duration` int DEFAULT NULL,
-                          `end` bigint DEFAULT NULL,
-                          `start_is_milestone` tinyint(1) DEFAULT NULL COMMENT '0- normal; 1- milestone;',
-                          `end_is_milestone` tinyint(1) DEFAULT NULL COMMENT '0- normal; 1- milestone;',
-                          `collapsed` tinyint(1) DEFAULT NULL,
-                          `visible` tinyint(1) DEFAULT NULL,
-                          `can_write` tinyint(1) DEFAULT NULL,
-                          `can_add` tinyint(1) DEFAULT NULL,
-                          `can_delete` tinyint(1) DEFAULT NULL,
-                          `can_add_issue` tinyint(1) DEFAULT NULL,
-                          `assigs` varchar(255) DEFAULT NULL,
-                          `has_child` tinyint(1) DEFAULT NULL,
-                          `project_id` int DEFAULT NULL,
-                          PRIMARY KEY (`backend_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+                           `id` int NOT NULL AUTO_INCREMENT,
+                           `serve_course_id` int DEFAULT NULL,
+                           `name` varchar(45) NOT NULL,
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
--- Records of action
+-- Records of course
 -- ----------------------------
 BEGIN;
+INSERT INTO `course` VALUES (1, 0, 'elec5618');
+INSERT INTO `course` VALUES (2, 1, 'elec5619');
+INSERT INTO `course` VALUES (3, 2, 'elec5620');
 COMMIT;
 
 -- ----------------------------
 -- Table structure for company
 -- ----------------------------
-DROP TABLE IF EXISTS `company`;
-CREATE TABLE `company` (
+DROP TABLE IF EXISTS `topic`;
+CREATE TABLE `topic` (
                            `id` int NOT NULL AUTO_INCREMENT,
-                           `serve_company_id` int DEFAULT NULL,
-                           `status` int DEFAULT NULL COMMENT '0- Active; 1- Deleted;',
-                           `address` varchar(100) DEFAULT NULL,
-                           `telephone` varchar(45) DEFAULT NULL,
-                           `name` varchar(45) NOT NULL,
-                           `abn` varchar(45) DEFAULT NULL,
-                           `type` varchar(45) DEFAULT NULL,
-                           `create_time` timestamp NULL DEFAULT NULL,
-                           PRIMARY KEY (`id`),
-                           UNIQUE KEY `abn_UNIQUE` (`abn`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+                           `title` varchar(45),
+                           `content` varchar(100),
+                           `author_id` int,
+                           `author_name` varchar(45),
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
--- Records of company
+-- Records of topic
 -- ----------------------------
 BEGIN;
-INSERT INTO `company` VALUES (1, 0, 0, 'Singapore building', '7891234', 'Tiktok', 'bd123', 'Transport', '2019-04-17 09:11:28');
-INSERT INTO `company` VALUES (2, 0, 0,'US building', '7891234', 'Apple', 'app123', 'Computer', '2019-04-17 09:11:28');
-INSERT INTO `company` VALUES (3, 1, 0,'AS building', '7891234', 'Facebook', 'fb123', 'Social', '2019-04-17 09:11:28');
+INSERT INTO `topic` VALUES (1, 'Title1', 'Content1',1, 'Student1');
 COMMIT;
 
 -- ----------------------------
@@ -119,54 +91,6 @@ CREATE TABLE `login_ticket` (
 BEGIN;
 COMMIT;
 
--- ----------------------------
--- Table structure for phase
--- ----------------------------
-DROP TABLE IF EXISTS `phase`;
-CREATE TABLE `phase` (
-                         `id` int NOT NULL AUTO_INCREMENT,
-                         `status` int DEFAULT NULL,
-                         `is_milestone` int DEFAULT NULL COMMENT '0- normal; 1- milestone;',
-                         `is_visible` int NOT NULL COMMENT '0- visible; 1- not visible to client;',
-                         `description` varchar(200) DEFAULT NULL,
-                         `project_id` varchar(45) NOT NULL,
-                         `title` varchar(100) DEFAULT NULL,
-                         `dependency` varchar(45) DEFAULT NULL,
-                         `start_date` timestamp NULL DEFAULT NULL,
-                         `duration` bigint DEFAULT NULL,
-                         `create_time` timestamp NULL DEFAULT NULL,
-                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- ----------------------------
--- Records of phase
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for project
--- ----------------------------
-DROP TABLE IF EXISTS `project`;
-CREATE TABLE `project` (
-                           `id` int NOT NULL AUTO_INCREMENT,
-                           `pm_id` int NOT NULL,
-                           `company_id` int NOT NULL,
-                           `status` int DEFAULT NULL,
-                           `is_template` int NOT NULL COMMENT '0- not template; 1- is template;',
-                           `title` varchar(100) DEFAULT NULL,
-                           `member_id_list` varchar(200) DEFAULT NULL,
-                           `summary` varchar(200) DEFAULT NULL,
-                           `department` varchar(45) DEFAULT NULL,
-                           `create_time` timestamp NULL DEFAULT NULL,
-                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- ----------------------------
--- Records of project
--- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for QRTZ_BLOB_TRIGGERS
