@@ -12,6 +12,8 @@ import java.util.List;
 @Builder
 public class Topic {
     private int id;
+    private int courseId;
+    private String courseName;
     private String title;
     private String content;
     private int authorId;

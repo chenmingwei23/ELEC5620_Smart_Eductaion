@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 与Dao对应的类一一对应-->
+<mapper namespace="com.ELEC5620.dao.ContentMapper">
+
+    <sql id="insertFields">
+        content, type, topic_id, topic_name, user_name, user_id
+    </sql>
+
+    <sql id="selectFields">
+        id, content, type, topic_id, topic_name, user_name, user_id
+    </sql>
+
+    <select id="selectByTopicName" resultType="com.ELEC5620.entity.Content">
+        select
+        <include refid="selectFields"></include>
+        from topic
+        where topic_name = #{name}
+    </select>
+
+    <select id="selectByStudentName" resultType="com.ELEC5620.entity.Content">
+        select
+        <include refid="selectFields"></include>
+        from user
+        where user_id = #{id}
+    </select>
+
+
+    <!-- id: 对应UserMapper里面那个函数， parameterType: 对应的Entity， keyProperty：主键-->
+    <insert id="createContent" parameterType="com.ELEC5620.entity.Content" keyProperty="id">
+        insert into content (<include refid="insertFields"></include>)
+        values(#{content}, #{type}, #{topicId}, #{topicName}, #{userName}, #{userId})
+    </insert>
+
+    <delete id="deleteContent">
+        DELETE
+        FROM content
+        WHERE id = #{id}
+    </delete>
+
+
+</mapper>
