@@ -31,7 +31,7 @@ public class FaceController {
 
     @PostMapping(value= "/postFace",produces="application/json;charset=UTF-8")
     public String getFaceFromFront(@RequestBody Map<String, Object> data) throws IOException {
-        byte[] bytes = Base64Util.base64ToImgByteArray(data.get("imagebase64").toString());
+        //byte[] bytes = Base64Util.base64ToImgByteArray(data.get("imagebase64").toString());
         String img = data.get("imagebase64").toString();
         String[] temp;
         temp = img.split(",");
