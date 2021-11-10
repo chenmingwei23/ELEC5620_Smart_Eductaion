@@ -14,11 +14,10 @@
         id, content, type, topic_id, topic_name, user_name, user_id
     </sql>
 
-
     <select id="selectByTopicName" resultType="com.ELEC5620.entity.Content">
         select
         <include refid="selectFields"></include>
-        from topic
+        from content
         where topic_name = #{name}
     </select>
 
@@ -31,7 +30,7 @@
 
 
     <!-- id: 对应UserMapper里面那个函数， parameterType: 对应的Entity， keyProperty：主键-->
-    <insert id="createContent" parameterType="com.ELEC5620.entity.Content" keyProperty="id">
+    <insert id="createContent" parameterType="com.ELEC5620.entity.Content" keyProperty="id" >
         insert into content (<include refid="insertFields"></include>)
         values(#{content}, #{type}, #{topicId}, #{topicName}, #{userName}, #{userId})
     </insert>
