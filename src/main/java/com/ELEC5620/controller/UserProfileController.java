@@ -23,12 +23,11 @@ public class    UserProfileController {
     @Autowired
     CourseMapper courseMapper;
 
-    @GetMapping(value= "/postUserProfile",produces="application/json;charset=UTF-8")
+    @GetMapping(value= "/getUserProfile",produces="application/json;charset=UTF-8")
     public List<Users> getUserProfile(String userName) {
         List<Users> users = userRepository.findByAcc(userName);
         return users;
     }
-
 
     @PostMapping(value= "/postUserProfile",produces="application/json;charset=UTF-8")
     public int postUserProfile(String userName, String email, String firstName, String lastName, String address, String postCode, String country) {
