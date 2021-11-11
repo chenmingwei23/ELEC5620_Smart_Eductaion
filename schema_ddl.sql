@@ -15,11 +15,12 @@ CREATE TABLE `attendance` (
                           `user_name` varchar(45),
                           `course_id` int,
                           `course_name` varchar(45) ,
+                          `time` timestamp,
                           PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 BEGIN;
-INSERT INTO `attendance` VALUES (1, 1, '111', 1, 'elec5618');
+INSERT INTO `attendance` VALUES (1, 1, '111', 1, 'elec5618', '2021-11-11 23:45:28');
 COMMIT;
 
 
