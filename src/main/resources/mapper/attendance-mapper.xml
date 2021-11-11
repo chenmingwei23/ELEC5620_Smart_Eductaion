@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 与Dao对应的类一一对应-->
+<mapper namespace="com.ELEC5620.dao.AttendanceMapper">
+
+    <!--注意！这里要按照数据库里的字段来写，而不是entity-->
+    <sql id="insertFields">
+        user_id, user_name, course_id, course_name
+    </sql>
+
+    <sql id="selectFields">
+        id, user_id, user_name, course_id, course_name
+    </sql>
+
+    <select id="selectByUserId" resultType="com.ELEC5620.entity.Attendance">
+        select
+        <include refid="selectFields"></include>
+        from attendance
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectByCourseName" resultType="com.ELEC5620.entity.Attendance">
+        select
+        <include refid="selectFields"></include>
+        from attendance
+        where course_name = #{courseName}
+    </select>
+
+    <insert id="insertAttendance" parameterType="com.ELEC5620.entity.Attendance" keyProperty="id">
+        insert into attendance (<include refid="insertFields"></include>)
+        values(#{userId}, #{userName}, #{courseId}, #{courseName})
+    </insert>
+
+
+</mapper>

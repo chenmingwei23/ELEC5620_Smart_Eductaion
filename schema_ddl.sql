@@ -4,6 +4,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 CREATE DATABASE IF NOT EXISTS education;
 USE education;
 
+
+-- ----------------------------
+-- Table structure for attendance
+-- ----------------------------
+DROP TABLE IF EXISTS `attendance`;
+CREATE TABLE `attendance` (
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `user_id` int,
+                          `user_name` varchar(45),
+                          `course_id` int,
+                          `course_name` varchar(45) ,
+                          PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+
+BEGIN;
+INSERT INTO `attendance` VALUES (1, 1, '111', 1, 'elec5618');
+COMMIT;
+
+
 -- ----------------------------
 -- Table structure for course
 -- ----------------------------
