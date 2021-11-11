@@ -1,8 +1,8 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE DATABASE IF NOT EXISTS smart_education;
-USE smart_education;
+CREATE DATABASE IF NOT EXISTS education;
+USE education;
 
 -- ----------------------------
 -- Table structure for course

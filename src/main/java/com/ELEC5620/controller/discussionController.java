@@ -31,28 +31,53 @@ public class discussionController {
         return all;
     }
 
-    @GetMapping(value= "/course",produces="application/json;charset=UTF-8")
-    public List<Topic> getTopic(@RequestParam String courseName){;
+    @PostMapping(value= "/course",produces="application/json;charset=UTF-8")
+    public List<Topic> getTopic(@RequestBody Map<String, Object> data){
+        String courseName = data.get("courseName").toString();
         List<Topic> returnTopic = topicMapper.selectByCourseName(courseName);
         return returnTopic;
     }
 
     @GetMapping(value= "/course/topic",produces="application/json;charset=UTF-8")
-    public List<Content> getContent(@RequestParam String topicName){;
+    public List<Content> getContent(@RequestParam Map<String, Object> data){
+        String topicName = data.get("topicName").toString();
+        System.out.println("============"+topicName);
         List<Content> returnContents = contentMapper.selectByTopicName(topicName);
         return returnContents;
     }
 
+    @PostMapping(value= "/course/add/topic",produces="application/json;charset=UTF-8")
+    public void addTopic(@RequestBody Map<String, Object> data){
+        String courseName = data.get("courseName").toString();
+        String title = data.get("title").toString();
+        int authorId = Integer.parseInt(data.get("authorId").toString());
+        String authorName = data.get("authorName").toString();
+
+        Topic topic = new Topic();
+        topic.setCourseId(1);
+        topic.setCourseName(courseName);
+        topic.setTitle(title);
+        topic.setAuthorId(authorId);
+        topic.setAuthorName(authorName);
+        topicMapper.insertTopic(topic);
+    }
+
     @PostMapping(value= "/course/topic",produces="application/json;charset=UTF-8")
-        public void createContent(@RequestParam String content, int type, int topicId, String topicName, String userName, int userId){
-            if (type<0 || type >2) {
+        public void createContent(@RequestBody Map<String, Object> data/*@RequestParam String content, int type, int topicId, String topicName, String userName, int userId*/){
+        String content = data.get("content").toString();
+        int type = Integer.parseInt(data.get("type").toString());
+        int topicId = (int) System.currentTimeMillis();
+        String topicName = data.get("topicName").toString();
+        String userName = data.get("userName").toString();
+        int userId = Integer.parseInt(data.get("userId").toString());
+        if (type<0 || type >2) {
                 System.out.println("content's type can only be within 0 to 2");
                 return;
             }
-            if (topicMapper.selectById(topicId) == null) {
-                System.out.println("topic not exist");
-                return;
-            }
+//            if (type == 1 && topicMapper.selectById(topicId) == null) {
+//                System.out.println("topic not exist");
+//                return;
+//            }
             Content post = new Content();
             post.setContent(content);
             post.setType(type);

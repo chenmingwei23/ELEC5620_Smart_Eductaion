@@ -18,4 +18,6 @@ public interface TopicMapper {
     int updateTopic(Topic topic);
 
     int deleteById(int id);
+
+    void createTopic (Topic topic);
 }

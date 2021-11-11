@@ -1,5 +1,6 @@
 package com.ELEC5620.dao;
 import com.ELEC5620.entity.Content;
+import com.ELEC5620.entity.Topic;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +14,9 @@ public interface ContentMapper {
 
     List<Content> selectByStudentId(int id);
 
-    Content createContent(Content content);
+    void createContent(Content content);
 
     Content deleteContent(int id);
-
 
 
 }
