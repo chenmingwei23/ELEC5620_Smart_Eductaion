@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface AttendanceMapper {
 
-    Attendance insertAttendance(Attendance attendance);
+    int insertAttendance(Attendance attendance);
 
     List<Attendance> selectByUserId(int userId);
 
