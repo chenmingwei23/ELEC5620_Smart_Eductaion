@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Attendance {
 
     int id;
-    int userID;
+    int userId;
     String userName;
     int  courseId;
     String courseName;
