@@ -30,6 +30,11 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     @Modifying
     @Transactional
+    @Query("update Users u set u.email=?2, u.firstName = ?3, u.lastName = ?4, u.address = ?5, u.post = ?6, u.country = ?7 where u.account = ?1")
+    public Integer updateUser(String userName, String email, String firstName, String lastName, String address, String postCode, String country);
+
+    @Modifying
+    @Transactional
     @Query("update Users u set u.password = ?1,u.changPwd = 1 where u.id = ?2")
     public Integer iniPwd(String pwd,Long id);
 

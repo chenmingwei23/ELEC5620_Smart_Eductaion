@@ -31,7 +31,7 @@
 
     <insert id="insertAttendance" parameterType="com.ELEC5620.entity.Attendance" keyProperty="id">
         insert into attendance (<include refid="insertFields"></include>)
-        values(#{userId}, #{userName}, #{courseId}, #{courseName})
+        values(#{userId}, #{userName}, #{courseId}, #{courseName},#{time})
     </insert>
 
 
