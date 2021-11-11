@@ -27,7 +27,7 @@ public class AttendanceController {
     public List<String> postAttendance(String courseName, int userId, String userName) {
         List<String> res = new ArrayList<>();
         Attendance attendance = new Attendance();
-        attendance.setUserID(userId);
+        attendance.setUserId(userId);
         attendance.setCourseName(courseName);
         attendance.setUserName(userName);
         attendanceMapper.insertAttendance(attendance);
