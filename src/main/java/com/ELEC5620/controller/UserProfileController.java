@@ -16,15 +16,22 @@ import java.util.Map;
 @RestController
 @RequestMapping("/profile")
 @CrossOrigin(origins = "http://localhost:3000/")
-public class UserProfileController {
+public class    UserProfileController {
 
     @Autowired
     UserRepository userRepository;
     @Autowired
     CourseMapper courseMapper;
 
+    @GetMapping(value= "/postUserProfile",produces="application/json;charset=UTF-8")
+    public List<Users> getUserProfile(String userName) {
+        List<Users> users = userRepository.findByAcc(userName);
+        return users;
+    }
+
+
     @PostMapping(value= "/postUserProfile",produces="application/json;charset=UTF-8")
-    public int postUserProfile(String userName, String email, String firstName, String lastName, String address, String postCode, String country, String aboutMe) {
+    public int postUserProfile(String userName, String email, String firstName, String lastName, String address, String postCode, String country) {
         return userRepository.updateUser(userName, email, firstName, lastName,  address, postCode, country);
     }
 
