@@ -43,6 +43,7 @@ public class UserController {
             result.add(nullUser);
         }else{
             String password = userRepository.findPwdByAcc(acc);
+            System.out.println(password);
             if(Objects.equals(password, pwd)){
                 result = userRepository.findByAcc(acc);
                 return result;

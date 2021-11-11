@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,10 @@ public class AttendanceController {
         List<String> res = new ArrayList<>();
         Attendance attendance = new Attendance();
         attendance.setUserId(userId);
+        attendance.setUserName("1");
         attendance.setCourseName(courseName);
         attendance.setUserName(userName);
+        attendance.setTime(new Date());
         attendanceMapper.insertAttendance(attendance);
         System.out.println("posted the attendance data to database "+ attendance.getUserName());
         return res;

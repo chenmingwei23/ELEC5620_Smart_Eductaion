@@ -12,10 +12,7 @@ public interface UserMapper {
 
     Users selectById(int id);
 
-    // 这里每加一个，就要在resources/mapper里加一条对应的语句
-    Users selectByEmail(String email);
-
-    int resetPassword(int id, String password);
+    Users selectByAcc(String acc);
 
     List<Users> selectByCompany(int companyId);
 

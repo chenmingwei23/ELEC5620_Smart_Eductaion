@@ -11,16 +11,16 @@ USE education;
 DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
                           `id` int NOT NULL AUTO_INCREMENT,
+                          `time` timestamp,
                           `user_id` int,
                           `user_name` varchar(45),
                           `course_id` int,
                           `course_name` varchar(45) ,
-                          `time` timestamp,
                           PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 BEGIN;
-INSERT INTO `attendance` VALUES (1, 1, '111', 1, 'elec5618', '2021-11-11 23:45:28');
+INSERT INTO `attendance` VALUES (1,'2021-11-11 23:45:28', 1, '111', 1, 'elec5618');
 COMMIT;
 
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 与Dao对应的类一一对应-->
+<mapper namespace="com.ELEC5620.dao.UserMapper">
+
+    <!--注意！这里要按照数据库里的字段来写，而不是entity-->
+    <sql id="insertFields">
+        acc, address, chang_pwd, country, email, first_name, gender, image, intro, last_name, major, pwd, post, role
+    </sql>
+
+    <sql id="selectFields">
+        id, acc, address, chang_pwd, country, email, first_name, gender, image, intro, last_name, major, pwd, post, role
+    </sql>
+
+    <select id="selectById" resultType="com.ELEC5620.entity.Users">
+        select
+        <include refid="selectFields"></include>
+        from user
+        where id = #{id}
+    </select>
+
+    <select id="selectByAcc" resultType="com.ELEC5620.entity.Users">
+        select
+        <include refid="selectFields"></include>
+        from user
+        where acc = #{acc}
+    </select>
+
+
+</mapper>
